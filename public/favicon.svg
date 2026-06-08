@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#F472B6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <circle cx="6" cy="6" r="3"/>
-  <path d="M8.12 8.12 12 12"/>
-  <path d="M20 4 8.12 15.88"/>
-  <circle cx="6" cy="18" r="3"/>
-  <path d="M14.8 14.8 20 20"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mesa Nativa">
+  <rect width="64" height="64" rx="16" fill="#24170F"/>
+  <circle cx="32" cy="32" r="21" fill="#FFF8EF"/>
+  <circle cx="32" cy="32" r="14" fill="none" stroke="#C98A2E" stroke-width="3"/>
+  <path d="M20 16v16M24 16v16M20 24h4M22 32v14" stroke="#5F3B22" stroke-width="3" stroke-linecap="round"/>
+  <path d="M42 16c4 5 4 12 0 16v14" stroke="#5F3B22" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
