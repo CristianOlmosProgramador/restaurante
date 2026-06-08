@@ -421,6 +421,173 @@ body::before {
   color: var(--tinta);
 }
 
+/* --------------------------------------------------------------------------
+   DRAWER MÓVIL (oculto por defecto; se activa desde el botón hamburguesa,
+   visible solo en móvil). Overlay con blur + panel deslizante elegante.
+   -------------------------------------------------------------------------- */
+.navbar__movil {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  visibility: hidden;
+  pointer-events: none;
+}
+.navbar__movil.abierto {
+  visibility: visible;
+  pointer-events: auto;
+}
+.navbar__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(42, 22, 32, 0.45);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-suave);
+}
+.navbar__movil.abierto .navbar__overlay {
+  opacity: 1;
+}
+
+.navbar__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(86%, 380px);
+  background: var(--crema);
+  display: flex;
+  flex-direction: column;
+  padding: 28px 32px 36px;
+  box-shadow: -30px 0 80px -30px rgba(42, 22, 32, 0.5);
+  transform: translateX(100%);
+  transition: transform 0.55s var(--ease-suave);
+  overflow-y: auto;
+}
+.navbar__movil.abierto .navbar__panel {
+  transform: translateX(0);
+}
+
+/* Cabecera del panel */
+.navbar__panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 26px;
+  border-bottom: 1px solid rgba(42, 22, 32, 0.1);
+}
+.navbar__panel-logo {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: var(--tinta);
+}
+.navbar__panel-logo .punto {
+  color: var(--champagne);
+  font-style: italic;
+}
+.navbar__cerrar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(42, 22, 32, 0.15);
+  color: var(--tinta);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transicion), color var(--transicion),
+    transform var(--transicion);
+}
+.navbar__cerrar:hover {
+  background: var(--rosa-oscuro);
+  color: var(--crema);
+  border-color: var(--rosa-oscuro);
+  transform: rotate(90deg);
+}
+
+/* Links: grandes, serif, con número y flecha. Entran escalonados. */
+.navbar__panel-links {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 0;
+  flex: 1;
+  justify-content: center;
+}
+.navbar__panel-links a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 0;
+  font-family: var(--serif);
+  font-size: 1.7rem;
+  font-weight: 400;
+  color: var(--tinta);
+  border-bottom: 1px solid rgba(42, 22, 32, 0.07);
+  /* estado inicial para la animación de entrada */
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity 0.5s var(--ease-suave),
+    transform 0.5s var(--ease-suave), color var(--transicion);
+}
+.navbar__movil.abierto .navbar__panel-links a {
+  opacity: 1;
+  transform: translateX(0);
+}
+.navbar__panel-links a:hover {
+  color: var(--rosa-oscuro);
+}
+.navbar__panel-links .num {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--champagne);
+  min-width: 24px;
+}
+.navbar__panel-links .flecha {
+  margin-left: auto;
+  color: var(--champagne);
+  opacity: 0;
+  transform: translate(-6px, 6px);
+  transition: opacity var(--transicion), transform var(--transicion);
+}
+.navbar__panel-links a:hover .flecha {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Pie del panel */
+.navbar__panel-foot {
+  padding-top: 26px;
+  border-top: 1px solid rgba(42, 22, 32, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.navbar__panel-foot .btn {
+  width: 100%;
+  justify-content: center;
+}
+.navbar__panel-redes {
+  display: flex;
+  gap: 12px;
+}
+.navbar__panel-redes a {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(42, 22, 32, 0.15);
+  color: var(--tinta);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transicion), color var(--transicion),
+    border-color var(--transicion), transform var(--transicion);
+}
+.navbar__panel-redes a:hover {
+  background: var(--rosa-oscuro);
+  color: var(--crema);
+  border-color: var(--rosa-oscuro);
+  transform: translateY(-3px);
+}
+
 /* ==========================================================================
    HERO — composición editorial asimétrica
    ========================================================================== */
@@ -1441,35 +1608,12 @@ body::before {
   .seccion {
     padding: 90px 0;
   }
+  /* Oculta los links de escritorio y muestra el botón hamburguesa */
   .navbar__links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 78%;
-    max-width: 340px;
-    height: 100vh;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 30px;
-    background: var(--crema);
-    box-shadow: -20px 0 60px -20px rgba(42, 22, 32, 0.4);
-    transition: right var(--transicion);
-    padding: 50px;
-  }
-  .navbar__links.abierto {
-    right: 0;
-  }
-  .navbar__links a {
-    color: var(--tinta) !important;
-    font-family: var(--serif);
-    font-size: 1.5rem;
-    text-transform: none;
-    letter-spacing: 0;
+    display: none;
   }
   .navbar__toggle {
     display: flex;
-    z-index: 1100;
   }
   .navbar__cta .btn {
     display: none;
