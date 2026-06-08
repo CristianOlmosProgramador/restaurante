@@ -1,31 +1,24 @@
 import { useEffect, useState } from 'react'
 import {
-  Menu,
-  X,
-  MessageCircle,
-  Scissors,
-  Instagram,
-  Facebook,
   ArrowUpRight,
+  Facebook,
+  Instagram,
+  Menu,
+  MessageCircle,
+  Utensils,
+  X,
 } from 'lucide-react'
 import { config, whatsappLink } from '../config/config'
 
-// Links de navegación (apuntan a los ids de cada sección).
 const LINKS = [
-  { label: 'Servicios', href: '#servicios' },
-  { label: 'Galería', href: '#galeria' },
-  { label: 'Equipo', href: '#equipo' },
+  { label: 'Nosotros', href: '#nosotros' },
+  { label: 'Carta', href: '#servicios' },
+  { label: 'Galeria', href: '#galeria' },
   { label: 'Testimonios', href: '#testimonios' },
-  { label: 'Contacto', href: '#contacto' },
-  { label: 'Ubicación', href: '#ubicacion' },
+  { label: 'Reserva', href: '#reserva' },
+  { label: 'Ubicacion', href: '#ubicacion' },
 ]
 
-/**
- * Navbar fija.
- * - Transparente sobre el Hero; se vuelve sólida con sombra al hacer scroll.
- * - En móvil despliega un drawer elegante a pantalla completa con overlay,
- *   links animados de forma escalonada, CTA de WhatsApp y redes sociales.
- */
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuAbierto, setMenuAbierto] = useState(false)
@@ -36,8 +29,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Bloquea el scroll del body y permite cerrar con la tecla Escape
-  // mientras el menú móvil está abierto.
   useEffect(() => {
     const onKey = (e) => e.key === 'Escape' && setMenuAbierto(false)
     if (menuAbierto) {
@@ -54,24 +45,27 @@ export default function Navbar() {
 
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-      <div className="contenedor navbar__inner">
-        {/* Logo (tijeras + wordmark serif con punto dorado) */}
+      <div className="contenedor navbar__inner navbar-restaurante__inner">
         <a href="#" className="navbar__logo" aria-label={config.negocio}>
-          <Scissors className="navbar__logo-icono" size={22} strokeWidth={1.6} />
-          {config.negocio}
-          <span className="punto">.</span>
+          <span className="navbar__logo-sello">
+            <Utensils size={18} strokeWidth={1.7} />
+          </span>
+          <span>
+            {config.negocio}
+            <small>{config.tipo}</small>
+          </span>
         </a>
 
-        {/* Links de navegación (solo escritorio) */}
-        <ul className="navbar__links">
-          {LINKS.map((link) => (
-            <li key={link.href}>
-              <a href={link.href}>{link.label}</a>
-            </li>
-          ))}
-        </ul>
+        <div className="navbar__centro">
+          <ul className="navbar__links">
+            {LINKS.map((link) => (
+              <li key={link.href}>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-        {/* CTA + toggle móvil */}
         <div className="navbar__cta">
           <a
             href={whatsappLink()}
@@ -80,31 +74,26 @@ export default function Navbar() {
             rel="noopener noreferrer"
           >
             <MessageCircle size={16} />
-            Reservar
+            Reserva
           </a>
 
           <button
             className="navbar__toggle"
             onClick={() => setMenuAbierto(true)}
-            aria-label="Abrir menú"
+            aria-label="Abrir menu"
           >
             <Menu size={26} />
           </button>
         </div>
       </div>
 
-      {/* ----------------------------------------------------------------- */}
-      {/* Drawer móvil                                                       */}
-      {/* ----------------------------------------------------------------- */}
       <div
         className={`navbar__movil ${menuAbierto ? 'abierto' : ''}`}
         aria-hidden={!menuAbierto}
       >
-        {/* Capa de fondo que cierra al tocar */}
         <div className="navbar__overlay" onClick={cerrarMenu} />
 
         <aside className="navbar__panel">
-          {/* Cabecera del panel */}
           <div className="navbar__panel-head">
             <span className="navbar__panel-logo">
               {config.negocio}
@@ -113,13 +102,12 @@ export default function Navbar() {
             <button
               className="navbar__cerrar"
               onClick={cerrarMenu}
-              aria-label="Cerrar menú"
+              aria-label="Cerrar menu"
             >
               <X size={24} />
             </button>
           </div>
 
-          {/* Links con numeración editorial y animación escalonada */}
           <nav className="navbar__panel-links">
             {LINKS.map((link, i) => (
               <a
@@ -135,7 +123,6 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* Pie: CTA + contacto + redes */}
           <div className="navbar__panel-foot">
             <a
               href={whatsappLink()}
@@ -145,7 +132,7 @@ export default function Navbar() {
               onClick={cerrarMenu}
             >
               <MessageCircle size={18} />
-              Reservar por WhatsApp
+              Reservar mesa
             </a>
 
             <div className="navbar__panel-redes">

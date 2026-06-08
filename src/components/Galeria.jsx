@@ -1,33 +1,29 @@
 import { Plus } from 'lucide-react'
 import { config } from '../config/config'
 
-/**
- * Galería de trabajos — grid asimétrico editorial.
- * Las imágenes se revelan con una "cortina" (reveal-img) y hacen zoom al hover.
- */
 export default function Galeria() {
   return (
     <section id="galeria" className="seccion galeria">
       <div className="contenedor">
         <div className="seccion-cabecera reveal">
-          <span className="eyebrow" data-num="02">
+          <span className="eyebrow" data-num="03">
             <span className="linea" />
-            Portafolio
+            Galeria
           </span>
           <h2 className="titulo">
-            Trabajos que <em>hablan</em> por nosotras
+            Ambiente, cocina y <em>detalles</em>
           </h2>
         </div>
 
         <div className="galeria__grid">
           {config.galeria.map((foto, i) => (
             <figure
-              key={i}
+              key={foto}
               className={`galeria__item reveal delay-${(i % 4) + 1}`}
             >
               <img
                 src={foto}
-                alt={`Trabajo de ${config.negocio} ${i + 1}`}
+                alt={`Ambiente de ${config.negocio} ${i + 1}`}
                 loading="lazy"
               />
               <span className="galeria__plus">

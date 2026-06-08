@@ -1,19 +1,14 @@
-import { Instagram, Facebook, Scissors } from 'lucide-react'
+import { Coffee, Facebook, Instagram } from 'lucide-react'
 import { config } from '../config/config'
 
-// Mismos links que el navbar para navegación rápida.
 const LINKS = [
-  { label: 'Servicios', href: '#servicios' },
-  { label: 'Galería', href: '#galeria' },
-  { label: 'Equipo', href: '#equipo' },
+  { label: 'Nosotros', href: '#nosotros' },
+  { label: 'Carta', href: '#servicios' },
+  { label: 'Galeria', href: '#galeria' },
   { label: 'Testimonios', href: '#testimonios' },
-  { label: 'Contacto', href: '#contacto' },
+  { label: 'Reserva', href: '#reserva' },
 ]
 
-/**
- * Footer del sitio.
- * Wordmark gigante de fondo + marca, navegación y redes sociales.
- */
 export default function Footer() {
   const anio = new Date().getFullYear()
 
@@ -21,22 +16,20 @@ export default function Footer() {
     <footer className="footer">
       <div className="contenedor">
         <div className="footer__grid">
-          {/* Marca */}
           <div className="footer__brand">
             <div className="footer__logo serif">
-              <Scissors size={22} strokeWidth={1.6} />
+              <Coffee size={22} strokeWidth={1.6} />
               {config.negocio}
               <span className="punto">.</span>
             </div>
             <p>
-              {config.slogan}. Te esperamos en {config.direccion} para
-              transformar tu look en una experiencia inolvidable.
+              {config.slogan}. Te esperamos en {config.direccion} para una mesa
+              rica, simple y bien atendida.
             </p>
           </div>
 
-          {/* Navegación */}
           <div>
-            <h4>Navegación</h4>
+            <h4>Navegacion</h4>
             <ul className="footer__links">
               {LINKS.map((link) => (
                 <li key={link.href}>
@@ -46,9 +39,8 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Redes sociales */}
           <div>
-            <h4>Síguenos</h4>
+            <h4>Siguenos</h4>
             <div className="footer__redes">
               {config.redes.instagram && (
                 <a
@@ -79,7 +71,7 @@ export default function Footer() {
             © {anio} {config.negocio}. Todos los derechos reservados.
           </span>
           <span>
-            Hecho con 💖 por{' '}
+            Hecho por{' '}
             <a
               href="https://webalpaso.cl"
               target="_blank"
