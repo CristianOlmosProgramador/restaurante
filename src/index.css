@@ -428,7 +428,8 @@ body::before {
   position: relative;
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   background: var(--rosa-oscuro);
   overflow: hidden;
 }
@@ -456,10 +457,6 @@ body::before {
   position: relative;
   z-index: 3;
   width: 100%;
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 40px;
-  align-items: center;
   padding-top: 90px;
 }
 
@@ -488,6 +485,7 @@ body::before {
   font-size: clamp(3rem, 7vw, 5.6rem);
   line-height: 0.98;
   letter-spacing: -0.025em;
+  max-width: 13ch;
 }
 .hero h1 em {
   font-style: italic;
@@ -893,6 +891,28 @@ body::before {
   background: var(--rosa-oscuro);
   color: var(--crema);
   overflow: hidden;
+  position: relative;
+}
+/* Atmósfera: resplandor radial sutil para que no sea un fondo plano */
+.testimonios::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 900px;
+  max-width: 120%;
+  background: radial-gradient(
+    circle,
+    rgba(244, 114, 182, 0.28),
+    transparent 62%
+  );
+  pointer-events: none;
+}
+.testimonios .contenedor {
+  position: relative;
+  z-index: 1;
 }
 .testimonios .eyebrow {
   color: var(--champagne-claro);
@@ -906,75 +926,162 @@ body::before {
 .testimonios .titulo em {
   color: var(--champagne-claro);
 }
+
+/* --- Tarjeta destacada --- */
+.testimonios__destacado {
+  position: relative;
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 18px 20px 0;
+}
 .testimonios__comilla {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 9rem;
-  line-height: 0.6;
+  position: absolute;
+  top: -56px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11rem;
+  line-height: 1;
   color: var(--champagne);
-  opacity: 0.45;
-  display: block;
-  margin-bottom: -10px;
+  opacity: 0.28;
+  pointer-events: none;
 }
-.testimonios__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-  gap: 30px;
-  margin-top: 50px;
+
+/* Animación suave al cambiar de reseña */
+.testimonios__cuerpo {
+  animation: fadeUp 0.6s var(--ease-suave);
 }
-.testimonio-card {
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: var(--radio-lg);
-  padding: 40px 34px;
-  background: rgba(255, 255, 255, 0.03);
-  transition: background var(--transicion), transform var(--transicion),
-    border-color var(--transicion);
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.testimonio-card:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: var(--champagne);
-  transform: translateY(-6px);
-}
-.testimonio-card__estrellas {
-  display: flex;
-  gap: 4px;
+
+.testimonios__estrellas {
+  display: inline-flex;
+  gap: 5px;
   color: var(--champagne);
-  margin-bottom: 22px;
+  margin-bottom: 28px;
 }
-.testimonio-card__texto {
-  font-family: var(--serif);
+.testimonios__texto {
   font-style: italic;
   font-weight: 300;
-  font-size: 1.32rem;
-  line-height: 1.5;
+  font-size: clamp(1.5rem, 3.2vw, 2.3rem);
+  line-height: 1.45;
   color: var(--crema);
-  margin-bottom: 30px;
+  margin-bottom: 38px;
+  border: none;
 }
-.testimonio-card__autor {
-  display: flex;
+.testimonios__autor {
+  display: inline-flex;
   align-items: center;
   gap: 16px;
+  text-align: left;
 }
-.testimonio-card__autor img {
-  width: 54px;
-  height: 54px;
+.testimonios__autor img {
+  width: 62px;
+  height: 62px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid var(--champagne);
+  border: 2px solid var(--champagne);
 }
-.testimonio-card__autor strong {
+.testimonios__autor strong {
   font-family: var(--serif);
   font-weight: 500;
-  font-size: 1.05rem;
+  font-size: 1.2rem;
   color: var(--crema);
 }
-.testimonio-card__autor span {
+.testimonios__autor span {
   display: block;
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--champagne-claro);
-  opacity: 0.8;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+/* --- Controles: flechas + avatares --- */
+.testimonios__controles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 50px;
+}
+.testimonios__flecha {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: var(--crema);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transicion), color var(--transicion),
+    border-color var(--transicion);
+  flex-shrink: 0;
+}
+.testimonios__flecha:hover {
+  background: var(--champagne);
+  color: var(--tinta);
+  border-color: var(--champagne);
+}
+.testimonios__avatares {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.testimonios__avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+  opacity: 0.45;
+  filter: grayscale(1);
+  transition: opacity var(--transicion), filter var(--transicion),
+    transform var(--transicion), box-shadow var(--transicion);
+  position: relative;
+}
+.testimonios__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.testimonios__avatar span {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.12);
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  color: var(--crema);
+}
+.testimonios__avatar:hover {
+  opacity: 0.85;
+  filter: grayscale(0);
+}
+.testimonios__avatar.activo {
+  opacity: 1;
+  filter: grayscale(0);
+  transform: scale(1.15);
+  box-shadow: 0 0 0 2px var(--champagne), 0 8px 20px -6px rgba(0, 0, 0, 0.5);
+}
+.testimonios__contador {
+  display: block;
+  text-align: center;
+  margin-top: 26px;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--champagne-claro);
+  letter-spacing: 0.1em;
 }
 
 /* ==========================================================================
@@ -1178,18 +1285,6 @@ body::before {
   overflow: hidden;
 }
 /* Wordmark gigante de fondo */
-.footer__wordmark {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(4rem, 16vw, 13rem);
-  line-height: 0.9;
-  color: rgba(255, 255, 255, 0.05);
-  text-align: center;
-  white-space: nowrap;
-  margin-bottom: 60px;
-  user-select: none;
-}
 .footer__grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;

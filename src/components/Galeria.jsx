@@ -23,7 +23,7 @@ export default function Galeria() {
           {config.galeria.map((foto, i) => (
             <figure
               key={i}
-              className={`galeria__item reveal-img delay-${(i % 4) + 1}`}
+              className={`galeria__item reveal delay-${(i % 4) + 1}`}
             >
               <img
                 src={foto}

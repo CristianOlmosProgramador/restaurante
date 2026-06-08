@@ -52,32 +52,6 @@ export default function Hero() {
             </a>
           </div>
         </div>
-
-        {/* Tarjeta de imagen flotante */}
-        <div className="hero__tarjeta reveal delay-3">
-          <img src={config.heroImagenSecundaria} alt="Trabajo destacado" />
-
-          {/* Sello dorado con texto circular */}
-          <div className="hero__sello">
-            <svg viewBox="0 0 100 100" aria-hidden="true">
-              <defs>
-                <path
-                  id="circulo"
-                  d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"
-                />
-              </defs>
-              <circle cx="50" cy="50" r="48" fill="#831843" />
-              <text fill="#e8d9bf" fontSize="9.5" letterSpacing="2.4">
-                <textPath href="#circulo" startOffset="0">
-                  · ESTILO · COLOR · CUIDADO · BELLEZA
-                </textPath>
-              </text>
-            </svg>
-            <span className="hero__sello-centro">
-              <MessageCircle size={22} />
-            </span>
-          </div>
-        </div>
       </div>
 
       {/* Estadística de marca */}

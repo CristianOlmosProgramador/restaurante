@@ -19,11 +19,6 @@ export default function Footer() {
 
   return (
     <footer className="footer">
-      {/* Wordmark decorativo gigante */}
-      <div className="footer__wordmark serif" aria-hidden="true">
-        {config.negocio}
-      </div>
-
       <div className="contenedor">
         <div className="footer__grid">
           {/* Marca */}

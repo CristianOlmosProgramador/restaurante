@@ -37,7 +37,7 @@ export const config = {
   heroImagen:
     'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1600&q=80',
   heroImagenSecundaria:
-    'https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&w=900&q=80',
+    'https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=900&q=80',
 
   // Año de fundación (se muestra como dato de marca en el hero).
   fundacion: '2015',
